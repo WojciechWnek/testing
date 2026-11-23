@@ -1,0 +1,13 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.ruff": "always"
+  },
+  "editor.defaultFormatter": "charliermarsh.ruff",
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "terminal.integrated.fontSize": 12,
+  "python-envs.defaultEnvManager": "ms-python.python:system"
+}
