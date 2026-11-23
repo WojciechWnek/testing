@@ -56,3 +56,12 @@ def inactive_wrestler(session: Session):
     session.commit()
     session.refresh(rock)
     return rock
+
+
+@pytest.fixture
+def user(session: Session):
+    boris = models.User(email="boris@example.com", hashed_password="secret123abc")
+    session.add(boris)
+    session.commit()
+    session.refresh(boris)
+    return boris
