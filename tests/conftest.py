@@ -65,3 +65,14 @@ def user(session: Session):
     session.commit()
     session.refresh(boris)
     return boris
+
+
+@pytest.fixture
+def admin(session: Session):
+    vince = models.User(
+        email="admin@example.com", hashed_password="secret123abc", role="admin"
+    )
+    session.add(vince)
+    session.commit()
+    session.refresh(vince)
+    return vince

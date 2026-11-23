@@ -55,3 +55,24 @@ def test_users_me_with_a_valid_token(client, user):
     )
     assert response.status_code == 200
     assert response.json()["email"] == user.email
+
+
+@pytest.mark.usefixtures("user")
+def test_admin_users_as_admin(client, admin):
+    response = client.get(
+        "/admin/users", headers={"Authorization": f"Bearer {admin.email}"}
+    )
+    assert response.status_code == 200
+    assert len(response.json()) == 2
+
+
+def test_admin_users_as_regular_user(client, user):
+    response = client.get(
+        "/admin/users", headers={"Authorization": f"Bearer {user.email}"}
+    )
+    assert response.status_code == 403
+
+
+def test_admin_users_without_a_token(client):
+    response = client.get("/admin/users")
+    assert response.status_code == 401
