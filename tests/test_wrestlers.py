@@ -1,11 +1,4 @@
-from fastapi.testclient import TestClient
-
-from main import app
-
-client = TestClient(app)
-
-
-def test_get_wrestlers():
+def test_get_wrestlers(client):
     response = client.get("/wrestlers")
     assert response.status_code == 200
     assert response.json() == []
