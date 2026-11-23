@@ -28,3 +28,31 @@ def client_fixture(session: Session):
     client = TestClient(app)
     yield client
     app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def wrestler(session: Session):
+    undertaker = models.Wrestler(
+        name="The Undertaker",
+        finisher="Tombstone Piledriver",
+        catchphrase="Rest in peace",
+        active=True,
+    )
+    session.add(undertaker)
+    session.commit()
+    session.refresh(undertaker)
+    return undertaker
+
+
+@pytest.fixture
+def inactive_wrestler(session: Session):
+    rock = models.Wrestler(
+        name="The Rock",
+        finisher="Rock Bottom",
+        catchphrase="Can you smell what the Rock is cooking?",
+        active=False,
+    )
+    session.add(rock)
+    session.commit()
+    session.refresh(rock)
+    return rock
